@@ -1,0 +1,10 @@
+streamlit==1.28.0
+spacy==3.7.2
+llmlingua==0.2.1
+protobuf==3.20.3
+transformers==4.35.0
+torch==2.1.0
+altair
+pandas
+numpy<2.0.0
+accelerate==0.31.0
