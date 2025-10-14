@@ -26,7 +26,7 @@ if torch.cuda.is_available():
     torch.cuda.empty_cache()
     gc.collect()
 
-# Optimized CSS - Mobile-friendly with reduced animations
+# Custom CSS - Dark Red & Black Theme
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -35,110 +35,165 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    /* Remove default margins */
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-    
-    /* Main container - Solid background for better mobile performance */
+    /* Main container - Dark theme */
     .main {
-        background: #1a1a1a;
-        padding: 1rem;
-    }
-    
-    .stApp {
-        background: #1a1a1a;
-    }
-    
-    /* Fixed header title - Always visible */
-    .fixed-header {
-        position: sticky;
-        top: 0;
-        z-index: 999;
         background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 100%);
-        padding: 1rem;
-        margin: -1rem -1rem 1rem -1rem;
-        border-bottom: 2px solid #dc2626;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        padding: 2rem;
     }
     
-    /* Main title - Large and visible */
-    .main-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        text-align: center;
-        margin: 0;
-        background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    /* Stacks background */
+    .stApp {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 100%);
+    }
+    
+    /* Gradient text - Dark Red */
+    .gradient-text {
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-    }
-    
-    /* Mobile optimization */
-    @media (max-width: 768px) {
-        .main-title {
-            font-size: 1.8rem;
-        }
-        
-        .fixed-header {
-            padding: 0.75rem;
-        }
-        
-        .stat-card {
-            margin: 0.5rem 0;
-            padding: 1rem;
-        }
-    }
-    
-    /* Subtitle */
-    .subtitle-text {
+        font-size: 3.5rem;
+        font-weight: 700;
         text-align: center;
-        font-size: 0.95rem;
-        color: #9ca3af;
-        margin: 0.5rem 0 0 0;
+        margin-bottom: 1rem;
+        animation: fadeInDown 1s ease-in-out;
     }
     
-    /* Stat cards - Simplified for mobile performance */
+    .title-box {
+        /* background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); */
+        padding: 2rem 1rem;
+        margin: -1rem -1rem 2rem -1rem;
+        text-align: center;
+        border-radius: 20px 20px 20px 20px;
+        border: 4px solid #dc2626; /* Red border */
+        box-shadow: 0 8px 24px rgba(220, 38, 38, 0.6);
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+    }
+    
+    .title-text {
+        font-size: 3rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        letter-spacing: 2px;
+    }
+    
+    .subtitle-text {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin: 0.8rem 0 0 0;
+        font-weight: 500;
+    }
+    
+     @media (max-width: 768px) {
+        .title-box {
+            padding: 1.5rem 0.5rem;
+            margin: 0 0 1.5rem 0;
+        }
+        
+        .title-text {
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle-text {
+            font-size: 0.85rem;
+        }
+        
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
     .stat-card {
         background: rgba(30, 30, 30, 0.95);
         border-radius: 12px;
         padding: 1.2rem;
-        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         border: 1px solid rgba(220, 38, 38, 0.3);
-        transition: transform 0.2s ease;
         margin: 1rem 0;
-        will-change: transform;
+        will-change: transform, box-shadow;
     }
     
-    /* Simplified hover - better for mobile */
-    .stat-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(220, 38, 38, 0.5);
+    .stat-card-glow {
+        background: linear-gradient(135deg, rgba(220, 38, 38, 0.25) 0%, rgba(153, 27, 27, 0.25) 100%);
+        border-radius: 12px;
+        padding: 1.2rem;
+        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.7);
+        border: 3px solid #dc2626;
+        margin: 1rem 0;
     }
     
-    /* Remove heavy animations on mobile */
-    @media (max-width: 768px) {
+    @media (hover: hover) {
         .stat-card:hover {
-            transform: none;
+            transform: translateY(-3px);
         }
         
-        .pulse-animation {
-            animation: none !important;
+        .stat-card-glow {
+            animation: glow-pulse 2s ease-in-out infinite;
         }
     }
     
-    /* Simplified pulse - less intensive */
+    @keyframes glow-pulse {
+        0%, 100% { box-shadow: 0 6px 20px rgba(220, 38, 38, 0.7); }
+        50% { box-shadow: 0 8px 28px rgba(220, 38, 38, 1); }
+    }
+    
+    /* Stat cards - Dark with red accents */
+    .stat-card {
+        background: rgba(30, 30, 30, 0.95);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(220, 38, 38, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 1rem 0;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 48px rgba(220, 38, 38, 0.4);
+        border-color: rgba(220, 38, 38, 0.6);
+    }
+    
+    /* Pulse animation */
     @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.9; }
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
     }
     
     .pulse-animation {
-        animation: pulse 3s infinite;
+        animation: pulse 2s infinite;
     }
     
-    /* Success message */
+    /* Fade animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Success message - Dark red */
     .success-message {
         background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
         color: white;
@@ -146,7 +201,20 @@ st.markdown("""
         border-radius: 12px;
         text-align: center;
         font-weight: 600;
+        animation: fadeInUp 0.5s ease-in-out;
         margin: 1rem 0;
+    }
+    
+    /* Token badge */
+    .token-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        margin: 0.5rem;
+        animation: fadeInUp 0.5s ease-in-out;
     }
     
     /* Progress bar */
@@ -154,7 +222,7 @@ st.markdown("""
         background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
     }
     
-    /* Button styling - Optimized */
+    /* Button styling - Dark red */
     .stButton > button {
         background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
         color: white;
@@ -163,25 +231,19 @@ st.markdown("""
         padding: 0.75rem 2rem;
         font-weight: 600;
         font-size: 1.1rem;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-        will-change: transform;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
     }
     
     .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(220, 38, 38, 0.6);
+        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+        background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
     }
-    
-    /* Mobile button optimization */
     @media (max-width: 768px) {
         .stButton > button {
-            padding: 0.6rem 1.5rem;
-            font-size: 1rem;
-        }
-        
-        .stButton > button:hover {
-            transform: none;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.95rem;
         }
     }
     
@@ -192,7 +254,7 @@ st.markdown("""
         background-color: #1f1f1f;
         color: #e5e7eb;
         font-family: 'Inter', sans-serif;
-        transition: border-color 0.2s ease;
+        transition: border-color 0.3s ease;
     }
     
     .stTextArea > div > div > textarea:focus {
@@ -200,40 +262,23 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
     }
     
-    /* Smooth scrolling */
-    html {
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Optimize scrolling on mobile */
-    @media (max-width: 768px) {
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        .main {
-            padding: 0.5rem;
-        }
-    }
-    
     /* Slider */
     .stSlider > div > div > div > div {
         background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
     }
     
-    /* Tabs - Optimized */
+    /* Tabs - Dark theme */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
         background-color: transparent;
     }
     
     .stTabs [data-baseweb="tab"] {
-        border-radius: 10px;
-        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        padding: 0.5rem 1.5rem;
         background: rgba(220, 38, 38, 0.1);
         color: #e5e7eb;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
     }
     
     .stTabs [aria-selected="true"] {
@@ -241,49 +286,31 @@ st.markdown("""
         color: white;
     }
     
-    /* Mobile tabs */
-    @media (max-width: 768px) {
-        .stTabs [data-baseweb="tab"] {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.9rem;
-        }
-    }
-    
-    /* Info box */
+    /* Info box - Dark */
     .info-box {
         background: rgba(220, 38, 38, 0.1);
         border-left: 4px solid #dc2626;
         padding: 1rem;
         border-radius: 8px;
         margin: 1rem 0;
+        animation: fadeInUp 0.5s ease-in-out;
         color: #e5e7eb;
     }
     
-    /* Comparison card - Simplified */
+    /* Comparison card - Dark */
     .comparison-card {
         background: #1f1f1f;
-        border-radius: 12px;
-        padding: 1rem;
-        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2);
+        transition: transform 0.3s ease;
         color: #e5e7eb;
         border: 1px solid rgba(220, 38, 38, 0.2);
-        transition: transform 0.2s ease;
-        will-change: transform;
     }
     
     .comparison-card:hover {
-        transform: scale(1.01);
+        transform: scale(1.02);
         border-color: rgba(220, 38, 38, 0.4);
-    }
-    
-    @media (max-width: 768px) {
-        .comparison-card {
-            padding: 0.8rem;
-        }
-        
-        .comparison-card:hover {
-            transform: none;
-        }
     }
     
     /* Sidebar styling */
@@ -295,33 +322,33 @@ st.markdown("""
         color: #e5e7eb !important;
     }
     
-    /* Select box */
+    /* Select box - Dark */
     .stSelectbox > div > div {
         background-color: #1f1f1f;
         color: #e5e7eb;
         border: 2px solid #dc2626;
     }
     
-    /* Number input */
+    /* Number input - Dark */
     .stNumberInput > div > div > input {
         background-color: #1f1f1f;
         color: #e5e7eb;
         border: 2px solid #dc2626;
     }
     
-    /* Code block */
+    /* Code block - Dark */
     code {
         background-color: #1f1f1f !important;
         color: #e5e7eb !important;
         border: 1px solid rgba(220, 38, 38, 0.3) !important;
     }
     
-    /* Markdown text */
+    /* Markdown text color */
     .stMarkdown {
         color: #e5e7eb;
     }
     
-    /* Headers */
+    /* Headers color */
     h1, h2, h3, h4, h5, h6 {
         color: #e5e7eb !important;
     }
@@ -338,19 +365,13 @@ st.markdown("""
         border-left: 4px solid #dc2626;
     }
     
-    /* Hardware acceleration for smoother scrolling */
+    @media (max-width: 768px) {
     * {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
+        animation: none !important;
+        transition: none !important;
     }
-    
-    /* Reduce motion for users who prefer it */
-    @media (prefers-reduced-motion: reduce) {
-        * {
-            animation: none !important;
-            transition: none !important;
-        }
-    }
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -408,10 +429,11 @@ class PromptOptimizer:
             "compressed_token_count": compressed_tokens
         }
 
-# Fixed Header with Title - Always visible
+# Header with custom HTML (shows correctly after set_page_config)
+# TITLE - Big and visible
 st.markdown("""
-<div class="fixed-header">
-    <h1 class="main-title">✂️ TokenTrim</h1>
+<div class="title-box">
+    <h1 class="title-text">✂️ TokenTrim</h1>
     <p class="subtitle-text">AI-Powered Prompt Optimization • Save Costs • Preserve Context</p>
 </div>
 """, unsafe_allow_html=True)
@@ -423,9 +445,9 @@ with col1:
     st.markdown("""
     <div class="stat-card">
         <div style="text-align: center;">
-            <div style="font-size: 2.5rem;">🚀</div>
-            <h3 style="color: #dc2626; font-size: 1.2rem; margin: 0.5rem 0;">Smart Compression</h3>
-            <p style="color: #9ca3af; font-size: 0.9rem; margin: 0;">Reduce tokens by up to 90%</p>
+            <div style="font-size: 3rem;">🚀</div>
+            <h3 style="color: #dc2626;">Smart Compression</h3>
+            <p style="color: #9ca3af;">Reduce tokens by up to 90%</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -434,9 +456,9 @@ with col2:
     st.markdown("""
     <div class="stat-card">
         <div style="text-align: center;">
-            <div style="font-size: 2.5rem;">💰</div>
-            <h3 style="color: #dc2626; font-size: 1.2rem; margin: 0.5rem 0;">Cost Savings</h3>
-            <p style="color: #9ca3af; font-size: 0.9rem; margin: 0;">Save thousands on API costs</p>
+            <div style="font-size: 3rem;">💰</div>
+            <h3 style="color: #dc2626;">Cost Savings</h3>
+            <p style="color: #9ca3af;">Save thousands on API costs</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -445,26 +467,28 @@ with col3:
     st.markdown("""
     <div class="stat-card">
         <div style="text-align: center;">
-            <div style="font-size: 2.5rem;">🎯</div>
-            <h3 style="color: #dc2626; font-size: 1.2rem; margin: 0.5rem 0;">Context Preserved</h3>
-            <p style="color: #9ca3af; font-size: 0.9rem; margin: 0;">Semantic meaning intact</p>
+            <div style="font-size: 3rem;">🎯</div>
+            <h3 style="color: #dc2626;">Context Preserved</h3>
+            <p style="color: #9ca3af;">Semantic meaning intact</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
+
+
 # Sidebar
 with st.sidebar:
     st.markdown("### 📖 How It Works")
     st.markdown("""
     <div class="info-box">
-    <strong>Step 1: spaCy Processing</strong><br>
-    Removes common stopwords and punctuation
+    <strong>Step 1: Enter a prompt </strong><br>
+    Input any text prompt you want to optimize
     </div>
     
     <div class="info-box">
-    <strong>Step 2: LLMLingua Compression</strong><br>
+    <strong>Step 2: do optimization setting</strong><br>
     AI-powered semantic compression
     </div>
     
@@ -586,44 +610,44 @@ if st.button("✨ Optimize My Prompt", use_container_width=True, type="primary")
                 
                 with metric_col1:
                     st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626; margin: 0; font-size: 1rem;">Original Tokens</h4>
+                    <div class="stat-card pulse-animation">
+                        <h4 style="color: #dc2626; margin: 0;">Original Tokens</h4>
                         <h2 style="margin: 0.5rem 0; color: #e5e7eb;">{original_tokens}</h2>
-                        <p style="color: #9ca3af; margin: 0; font-size: 0.85rem;">Input length</p>
+                        <p style="color: #9ca3af; margin: 0; font-size: 0.9rem;">Input length</p>
                     </div>
                     """, unsafe_allow_html=True)
                 
                 with metric_col2:
                     st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626; margin: 0; font-size: 1rem;">Optimized Tokens</h4>
+                    <div class="stat-card pulse-animation">
+                        <h4 style="color: #dc2626; margin: 0;">Optimized Tokens</h4>
                         <h2 style="margin: 0.5rem 0; color: #e5e7eb;">{compressed_tokens}</h2>
-                        <p style="color: #9ca3af; margin: 0; font-size: 0.85rem;">Output length</p>
+                        <p style="color: #9ca3af; margin: 0; font-size: 0.9rem;">Output length</p>
                     </div>
                     """, unsafe_allow_html=True)
                 
                 with metric_col3:
                     st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626; margin: 0; font-size: 1rem;">Tokens Saved</h4>
+                    <div class="stat-card pulse-animation">
+                        <h4 style="color: #dc2626; margin: 0;">Tokens Saved</h4>
                         <h2 style="margin: 0.5rem 0; color: #10b981;">{token_reduction}</h2>
-                        <p style="color: #9ca3af; margin: 0; font-size: 0.85rem;">Reduction</p>
+                        <p style="color: #9ca3af; margin: 0; font-size: 0.9rem;">Reduction</p>
                     </div>
                     """, unsafe_allow_html=True)
                 
                 with metric_col4:
                     st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626; margin: 0; font-size: 1rem;">Savings</h4>
+                    <div class="stat-card pulse-animation">
+                        <h4 style="color: #dc2626; margin: 0;">Savings</h4>
                         <h2 style="margin: 0.5rem 0; color: #10b981;">{token_savings_percent:.1f}%</h2>
-                        <p style="color: #9ca3af; margin: 0; font-size: 0.85rem;">Efficiency gain</p>
+                        <p style="color: #9ca3af; margin: 0; font-size: 0.9rem;">Efficiency gain</p>
                     </div>
                     """, unsafe_allow_html=True)
 
                 st.markdown("<br>", unsafe_allow_html=True)
 
                 # Tabs
-                tab1, tab2, tab3, tab4 = st.tabs(["🎯 Optimized", "📄 Original", "🔧 Stopwords", "⚖️ Compare"])
+                tab1, tab2, tab3, tab4 = st.tabs(["🎯 Optimized Prompt", "📄 Original Prompt", "🔧 Stopword Removal", "⚖️ Side-by-Side"])
                 
                 with tab1:
                     st.markdown("### ✨ Your Optimized Prompt")
@@ -653,65 +677,61 @@ if st.button("✨ Optimize My Prompt", use_container_width=True, type="primary")
                         st.markdown("#### ✨ Optimized")
                         st.markdown(f'<div class="comparison-card">{results["final_compressed_prompt"]}</div>', unsafe_allow_html=True)
 
-                # Cost calculator
+                # Simple cost calculator - no inputs, just shows savings
                 st.markdown("---")
-                st.markdown("## 💰 Cost Savings Calculator")
+                st.markdown("## 💰 Estimated Cost Savings")
                 
-                cost_col1, cost_col2, cost_col3 = st.columns(3)
-                
-                with cost_col1:
-                    model_prices = {
-                        "GPT-4 Turbo": 0.01,
-                        "GPT-4": 0.03,
-                        "GPT-3.5 Turbo": 0.0015,
-                        "Claude Opus": 0.015,
-                        "Claude Sonnet": 0.003
-                    }
-                    selected_model = st.selectbox("Select your LLM:", list(model_prices.keys()))
-                    cost_per_1k = model_prices[selected_model]
-                
-                with cost_col2:
-                    daily_prompts = st.number_input("Daily prompts:", min_value=1, value=100, step=10)
-                
-                with cost_col3:
-                    months = st.slider("Calculate for months:", 1, 12, 1)
+                st.info("📊 Based on GPT-4 pricing ($0.03 per 1K tokens) with 100 prompts per day")
 
-                original_cost_per_prompt = (original_tokens / 1000) * cost_per_1k
-                compressed_cost_per_prompt = (compressed_tokens / 1000) * cost_per_1k
-                cost_saved_per_prompt = original_cost_per_prompt - compressed_cost_per_prompt
-                
-                daily_savings = cost_saved_per_prompt * daily_prompts
-                monthly_savings = daily_savings * 30
-                total_savings = monthly_savings * months
+                # Calculate for different models
+                models = {
+                    "GPT-4": 0.03,
+                    "GPT-4 Turbo": 0.01,
+                    "Claude Opus": 0.015,
+                    "Claude Sonnet": 0.003,
+                    "GPT-3.5": 0.0015
+                }
 
-                savings_col1, savings_col2, savings_col3 = st.columns(3)
-                
-                with savings_col1:
-                    st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626;">Daily Savings</h4>
-                        <h2 style="color: #10b981;">${daily_savings:.2f}</h2>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with savings_col2:
-                    st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626;">Monthly Savings</h4>
-                        <h2 style="color: #10b981;">${monthly_savings:.2f}</h2>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with savings_col3:
-                    st.markdown(f"""
-                    <div class="stat-card">
-                        <h4 style="color: #dc2626;">{months}-Month Savings</h4>
-                        <h2 style="color: #10b981;">${total_savings:.2f}</h2>
-                    </div>
-                    """, unsafe_allow_html=True)
+                daily_prompts = 100
 
-                st.caption(f"💡 Based on {selected_model} pricing (${cost_per_1k}/1K tokens) with {daily_prompts} prompts/day")
+                for model_name, cost_per_1k in models.items():
+                    original_cost = (original_tokens / 1000) * cost_per_1k * daily_prompts
+                    compressed_cost = (compressed_tokens / 1000) * cost_per_1k * daily_prompts
+                    daily_saved = original_cost - compressed_cost
+                    monthly_saved = daily_saved * 30
+                    yearly_saved = daily_saved * 365
 
+                    col_a, col_b, col_c, col_d = st.columns(4)
+                    
+                    with col_a:
+                        st.markdown(f"**{model_name}**")
+                    
+                    with col_b:
+                        st.markdown(f"""
+                        <div class="stat-card">
+                            <p style="color: #9ca3af; margin: 0; font-size: 0.8rem;">Daily</p>
+                            <h4 style="color: #10b981; margin: 0.3rem 0;">${daily_saved:.2f}</h4>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    with col_c:
+                        st.markdown(f"""
+                        <div class="stat-card">
+                            <p style="color: #9ca3af; margin: 0; font-size: 0.8rem;">Monthly</p>
+                            <h4 style="color: #10b981; margin: 0.3rem 0;">${monthly_saved:.2f}</h4>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    with col_d:
+                        st.markdown(f"""
+                        <div class="stat-card-glow">
+                            <p style="color: #d1d5db; margin: 0; font-size: 0.8rem;">Yearly</p>
+                            <h4 style="color: #10b981; margin: 0.3rem 0; font-weight: 700;">${yearly_saved:.2f}</h4>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    st.markdown("<br>", unsafe_allow_html=True)
+                    
                 # Testing section
                 st.markdown("---")
                 st.markdown("## 🧪 Test Both Prompts")
@@ -740,9 +760,9 @@ if st.button("✨ Optimize My Prompt", use_container_width=True, type="primary")
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; padding: 1.5rem; color: #9ca3af;">
-    <p style="font-size: 1rem; margin-bottom: 0.5rem;">Made with ❤️ using <strong style="color: #dc2626;">TokenTrim</strong></p>
-    <p style="font-size: 0.85rem;">Powered by LLMLingua & spaCy | Running on CPU Mode</p>
-    <p style="font-size: 0.75rem; margin-top: 1rem;">🔒 Your data is processed locally and never stored</p>
+<div style="text-align: center; padding: 2rem; color: #9ca3af;">
+    <p style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong style="color: #dc2626;">TokenTrim</strong> created with ❤️ by<strong> Yash</strong> </p>
+    <p style="font-size: 0.9rem;"> | Running on CPU Mode | </p>
+    <p style="font-size: 0.8rem; margin-top: 1rem;">🔒 Your data is processed locally and never stored</p>
 </div>
 """, unsafe_allow_html=True)
