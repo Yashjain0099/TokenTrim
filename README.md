@@ -58,30 +58,30 @@ AI-powered semantic compression that intelligently reduces tokens while maintain
 
 ### Example 1: Data Analysis Prompt
 
-**Before** (142 tokens):
+**Before** (36 tokens):
 ```
 Please analyze the following financial report in detail and provide a comprehensive 
 summary of all the key findings, highlighting any potential risks or opportunities 
 that may be relevant for our investment strategy going forward.
 ```
 
-**After** (56 tokens - 60.6% reduction):
+**After** (19 tokens - 47.2% reduction):
 ```
-analyze financial report provide summary key findings highlighting potential risks 
-opportunities relevant investment strategy
+analyze following financial report detail provide comprehensive summary key findings
+highlighting potential risks opportunitiesrelevant investment strategy going forward
 ```
 
 **💰 Savings**: $2,580/year @ 1000 prompts/day on GPT-4
 
 ### Example 2: Content Writing
 
-**Before** (87 tokens):
+**Before** (35 tokens):
 ```
 I need you to write a detailed blog post about artificial intelligence and machine 
 learning technologies, covering the history, current applications, and future potential.
 ```
 
-**After** (31 tokens - 64.4% reduction):
+**After** (20 tokens - 42.9% reduction):
 ```
 write blog post artificial intelligence machine learning history applications future potential
 ```
@@ -287,4 +287,5 @@ Special thanks to:
 [Website](#) • [Documentation](#) • [GitHub](#) • [Twitter](#)
 
 </div>
+
 
