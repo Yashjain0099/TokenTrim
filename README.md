@@ -6,6 +6,11 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28.0-FF4B4B.svg)](https://streamlit.io)
+[![Python](https://img.shields.io/badge/Python-3.9.7-blue.svg)](https://www.python.org)
+[![spaCy](https://img.shields.io/badge/spaCy-3.2.0-blue.svg)](https://spacy.io)
+[![LLMLingua](https://img.shields.io/badge/LLMLingua-1.0.0-blue.svg)](https://example.com/LLMLingua)
+[![Docker](https://img.shields.io/badge/Docker-20.10.7-blue.svg)](https://www.docker.com)
+
 
 [Try Demo](#) • [Report Bug](#) • [Request Feature](#)
 
@@ -282,3 +287,4 @@ Special thanks to:
 [Website](#) • [Documentation](#) • [GitHub](#) • [Twitter](#)
 
 </div>
+
